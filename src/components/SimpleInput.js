@@ -7,6 +7,12 @@ const SimpleInput = (props) => {
 	const enteredNameIsValid = enteredName.trim() !== ''
 	const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched
 
+	let formIsValid = false
+
+	if (enteredNameIsValid) {
+		formIsValid = true
+	}
+
 	const nameInputChangeHandler = event => {
 		setEnteredName(event.target.value)
 	}
@@ -50,8 +56,21 @@ const SimpleInput = (props) => {
 					<p className='error-text'>Name moust not be empty.</p>
 				)}
 			</div>
+			<div className={nameInputClasses}>
+				<label htmlFor='email'>Your E-Mail</label>
+				<input
+					type='email'
+					id='email'
+					onChange={nameInputChangeHandler}
+					onBlur={nameInputBlurHandler}
+					value={enteredName}
+				/>
+				{nameInputIsInvalid && (
+					<p className='error-text'>Name moust not be empty.</p>
+				)}
+			</div>
 			<div className="form-actions">
-				<button>Submit</button>
+				<button disabled={!formIsValid}>Submit</button>
 			</div>
 		</form>
 	);
